@@ -31,6 +31,7 @@
     "license": "LGPL-3",
     'depends': [],
     'data': [
+				'views/model_one_view.xml'
         ],
     'test': [],
     'demo': [],

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<!--Form view-->
+		<record id="model_one_form_view" model="ir.ui.view">
+			<field name="name">model.one.form</field>
+			<field name="model">model.one</field>
+			<field name="arch" type="xml">
+				<form string='Model One' >
+					<field name="create_date" />
+				</form>
+			</field>
+		</record>
+		
+	</data>
+</odoo>
