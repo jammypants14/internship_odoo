@@ -10,3 +10,4 @@ class ModelOne(models.Model):
 	gender = fields.Selection([('male', 'Male'), ('female', 'Female'), ('other', 'Other')], string="Gender")
 	active = fields.Boolean('Active')
 	description = fields.Text("Description")
+	date = fields.Date("Date")

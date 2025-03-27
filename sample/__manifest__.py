@@ -32,8 +32,10 @@
     'depends': [],
     'data': [
 				'security/ir.model.access.csv',
+				'security/security.xml',
 				'views/model_one_view.xml',
 				'views/menu.xml'
+				
         ],
     'test': [],
     'demo': [],
