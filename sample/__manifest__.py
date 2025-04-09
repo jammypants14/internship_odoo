@@ -29,7 +29,7 @@
     'author': ' Jishnu Ajayan M',
     'website': 'www.zbeanztech.com',
     "license": "LGPL-3",
-    'depends': ['product'],
+    'depends': ['product', 'sale'],
     'data': [
 				'security/ir.model.access.csv',
 				'security/security.xml',
