@@ -38,6 +38,7 @@
 						<page string="Model One Lines">
 							<field name="model_one_line_ids" >
 								<list editable="bottom">
+									<field name="id" />
 									<field name="name" />
 									<field name="product_id"  />
 									<field name="price"  />
