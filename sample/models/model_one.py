@@ -21,9 +21,24 @@ class ModelOne(models.Model):
 	is_special = fields.Boolean('Is Special')
 	
 	
+	# -----------------------------------------------------------------------
+	# Odoo Command Tuples for One2many and Many2many Fields
+	# -----------------------------------------------------------------------
+	# Syntax                  Description                          Use With
+	# (0, 0, {values})        Create a new record                  O2M, M2M
+	# (1, id, {values})       Update an existing record            O2M
+	# (2, id)                 Delete and unlink existing record    O2M, M2M
+	# (3, id)                 Unlink (do not delete) record        O2M, M2M
+	# (4, id)                 Link to an existing record           O2M, M2M
+	# (5,)                    Unlink all                           M2M
+	# (6, 0, [ids])           Replace all links with given records O2M, M2M
+	# -----------------------------------------------------------------------
+	
+	# method for writing to relational fields (m2m & o2m)
 	def write_values(self):
 		#special commands for writing to relational fields
 		#1. many2many fields
+		
 		products = self.env['product.template'].search([('list_price', '>', 200)], limit=1).id
 		order = self.env['sale.order'].search([('id', '=', 26)], limit=1).id
 		#self.write({'product_ids' : [[6, 0, products]]})                                        #replace existing values with new values - syntax : [6, 0, [IDs]]
@@ -34,6 +49,7 @@ class ModelOne(models.Model):
 		#self.write({'product_ids' : [[0, 0, {'name': 'Test Product', 'list_price':200}]]})        
 		
 		#2. one2many fields
+		
 		#self.write({'model_one_line_ids' : [[0, 0, {'name': 'Test 1', 'product_id':products, 'price': 250}]]})    
 		#line = self.model_one_line_ids.filtered(lambda l : l.price == 300).id
 		#existing_line = self.env['model.one.lines'].search([('price', '=', 300)], limit=1).id
@@ -45,10 +61,8 @@ class ModelOne(models.Model):
 		#self.write({'model_one_line_ids' : [[4, ex_line]]})  
 		self.write({'model_one_line_ids' : [[6, 0, ex_line]]})     
 		           
-				
-	def helloworld(self):
-		print("hello world")
 	
+	# display a wizard through button action
 	def show_wizard(self):
 		return {
             'type': 'ir.actions.act_window',
