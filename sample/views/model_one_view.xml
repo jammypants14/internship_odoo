@@ -13,7 +13,6 @@
 						<button name="%(sample.action_for_sample_wizard)d" string="Wizard Action Button" type="action" class="oe_highlight" />
 						<button name="%(sale.action_quotations_with_onboarding)d" string="Sale Order" type="action" class="oe_highlight" />
 						<button name="write_values" string="Write Values" type="object" class="btn-primary" />
-
 					</header>
 					<sheet>
 						<group>
@@ -28,10 +27,12 @@
 						</group>
 						<group>
 							<field name="gender" />
+							<field name="is_special" />	
 							<field name="active" />	
 							<field name="date" />	
 							<field name="create_uid" />	
 							<field name="partner_ids" widget="many2many_tags"  />	
+							<field name="partner_count" />	
 						</group>
 					</group>
 					<notebook>

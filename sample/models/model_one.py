@@ -17,6 +17,8 @@ class ModelOne(models.Model):
 	product_ids = fields.Many2many('product.template', 'model_one_prduct_rel', 'model_one_id', 'product_id',  string="Products")
 	model_one_line_ids = fields.One2many('model.one.lines', 'model_one_id',  string="Products")
 	sale_id = fields.Many2one('sale.order', string="Sales")
+	partner_count = fields.Integer(string="Partner Count", compute="get_partner_count")
+	is_special = fields.Boolean('Is Special')
 	
 	
 	def write_values(self):
@@ -57,13 +59,32 @@ class ModelOne(models.Model):
             'target': 'new',
             'context' : {'default_name': 'Jishnu'}
         }
-	    
+
+	# @api method decorators
+	#1. @api.model : model level operations, don't need recordsets
 	@api.model
 	def create(self, vals):
 		vals['seq'] = self.env['ir.sequence'].next_by_code('sequence.model.one')
 		res = super(ModelOne, self).create(vals)
 		return res
 	
+	#2. @api.depends : define dependencies between models and fields
+	@api.depends('partner_ids')
+	def get_partner_count(self):
+		for record in self:
+			if record.partner_ids:
+				record.partner_count = len(record.partner_ids)
+			else:
+				record.partner_count = 0
+	
+	#3. @api.onchange : execute your logic when there is a change in a field
+	@api.onchange('gender')
+	def onchange_gender(self):
+		for record in self:
+			if record.gender == 'other':
+				record.is_special = True
+			else:
+				record.is_special = False
 	
 class ModelOneLines(models.Model):
 	
