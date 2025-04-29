@@ -1,4 +1,6 @@
 from odoo import models, fields, api
+from odoo.exceptions import ValidationError 
+
 
 class ModelOne(models.Model):
 	
@@ -19,6 +21,7 @@ class ModelOne(models.Model):
 	sale_id = fields.Many2one('sale.order', string="Sales")
 	partner_count = fields.Integer(string="Partner Count", compute="get_partner_count")
 	is_special = fields.Boolean('Is Special')
+	email = fields.Char(string="Email")
 	
 	
 	# -----------------------------------------------------------------------
@@ -99,6 +102,23 @@ class ModelOne(models.Model):
 				record.is_special = True
 			else:
 				record.is_special = False
+
+	def increase_age(self):
+		for record in self:
+			record.age += 1
+	
+	@api.constrains('email')
+	def check_email(self):
+		for record in self:
+			if not record.email.endswith('@gmail.com'):
+				raise ValidationError("This email doesn't end with @gmail.com. Please enter a valid email address.")
+	
+	_sql_constraints = [
+        ('unique_email_user', 'unique (email)', 'This email already exists. Email must be unique'),
+    ]
+    
+    
+	
 	
 class ModelOneLines(models.Model):
 	

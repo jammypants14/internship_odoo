@@ -20,6 +20,7 @@
 							<field name="name" string="Display Name" />
 							<field name="age" readonly="1"  />
 							<field name="description" />
+							<field name="email" />
 							<field name="product_ids" widget="many2many_tags" />	
 							<field name="sale_ids" widget="many2many_tags" />	
 							<field name="sale_id" domain="[('state', '=', 'sale'),('user_id', '=', 2)]" />
