@@ -34,7 +34,7 @@
 				'security/ir.model.access.csv',
 				'security/security.xml',
 				'data/sequence.xml',
-				#'data/cron.xml',
+				'data/cron.xml',
 				'wizard/sample_wizard_view.xml',
 				'views/model_one_view.xml',
 				'views/model_one_lines.xml',
