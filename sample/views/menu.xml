@@ -25,4 +25,10 @@
 		parent='sample.menu_for_sampleeee_module'
 		sequence="3" />
 		
+	<menuitem id="menu_for_my_employee"
+		name="Employee"
+		action="action_for_my_employee"
+		parent='sample.menu_for_sampleeee_module'
+		sequence="4" />
+		
 </odoo>
