@@ -6,6 +6,7 @@ class ModelOne(models.Model):
 	
 	_name = "model.one"
 	_description = "Model One"
+	_inherits = {'my.employee': 'employee_id'}
 	
 	seq = fields.Char(string="Sequence")
 	name = fields.Char(string="Name", help='You can add your name here', copy=False)
@@ -22,6 +23,7 @@ class ModelOne(models.Model):
 	partner_count = fields.Integer(string="Partner Count", compute="get_partner_count")
 	is_special = fields.Boolean('Is Special')
 	email = fields.Char(string="Email")
+	employee_id = fields.Many2one('my.employee', string="Employee")
 	
 	
 	# -----------------------------------------------------------------------
