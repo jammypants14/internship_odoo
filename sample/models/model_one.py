@@ -24,6 +24,7 @@ class ModelOne(models.Model):
 	is_special = fields.Boolean('Is Special')
 	email = fields.Char(string="Email")
 	employee_id = fields.Many2one('my.employee', string="Employee")
+	sale_count = fields.Integer(string="Sale Count", compute="get_sale_count")
 	
 	
 	# -----------------------------------------------------------------------
@@ -96,6 +97,14 @@ class ModelOne(models.Model):
 			else:
 				record.partner_count = 0
 	
+	@api.depends('sale_ids')
+	def get_sale_count(self):
+		for record in self:
+			if record.sale_ids:
+				record.sale_count = len(record.sale_ids)
+			else:
+				record.sale_count = 0
+	
 	#3. @api.onchange : execute your logic when there is a change in a field
 	@api.onchange('gender')
 	def onchange_gender(self):
@@ -134,6 +143,16 @@ class ModelOne(models.Model):
 		for record in self:
 			values = {'subject' : 'My Custom Subject via Method'}
 			template.send_mail(record.id, force_send=True, email_values=values)
+	
+	def show_sale(self):
+		return {
+            'type': 'ir.actions.act_window',
+            'name': 'Sale Order',
+            'res_model': 'sale.order',
+            'view_mode': 'list,form',
+            'target': 'current',
+            'domain' : [('id', 'in', self.sale_ids.ids)]
+        }
 	
 class ModelOneLines(models.Model):
 	
