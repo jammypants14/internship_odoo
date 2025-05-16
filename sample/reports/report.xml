@@ -9,5 +9,13 @@
         <field name="report_file">sample.model_one_pdf_report</field>
 		<field name="binding_model_id" ref="sample.model_model_one" />
     </record>
-    
+    <record id="action_report_model_one_xlsx" model="ir.actions.report">
+	    <field name="name">Model One XLSX Report</field>
+	    <field name="model">model.one</field>
+	    <field name="report_type">xlsx</field>
+	    <field name="report_name">sample.report_model_one_xlsx</field>
+	    <field name="report_file">sample.report_model_one_xlsx</field>
+	    <field name="binding_model_id" ref="sample.model_model_one"/>
+	    <field name="binding_type">report</field>
+	</record>
 </odoo>
