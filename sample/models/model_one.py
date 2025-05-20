@@ -154,6 +154,12 @@ class ModelOne(models.Model):
             'domain' : [('id', 'in', self.sale_ids.ids)]
         }
 	
+	def print_model_one_pdf(self):
+		return self.env.ref('sample.action_report_model_one').report_action(self)  
+	
+	def print_model_one_xlsx(self):
+		return self.env.ref('sample.action_report_model_one_xlsx').report_action(self)  
+	
 class ModelOneLines(models.Model):
 	
 	_name = "model.one.lines"
