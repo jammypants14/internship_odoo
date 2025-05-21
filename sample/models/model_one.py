@@ -25,6 +25,7 @@ class ModelOne(models.Model):
 	email = fields.Char(string="Email")
 	employee_id = fields.Many2one('my.employee', string="Employee")
 	sale_count = fields.Integer(string="Sale Count", compute="get_sale_count")
+	company_id = fields.Many2one('res.company', string="Company")
 	
 	
 	# -----------------------------------------------------------------------
