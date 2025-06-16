@@ -6,6 +6,7 @@ class ModelOne(models.Model):
 	
 	_name = "model.one"
 	_description = "Model One"
+	_inherit = ['mail.thread', 'mail.activity.mixin']
 	_inherits = {'my.employee': 'employee_id'}
 	
 	seq = fields.Char(string="Sequence")
@@ -15,7 +16,7 @@ class ModelOne(models.Model):
 	active = fields.Boolean('Active')
 	description = fields.Text("Description", default="Test Description")
 	date = fields.Date("Date")
-	partner_ids = fields.Many2many('res.partner', string="Partner")
+	partner_ids = fields.Many2many('res.partner', string="Partner", tracking=True)
 	sale_ids = fields.Many2many('sale.order', string="Sale Order")
 	product_ids = fields.Many2many('product.template', 'model_one_prduct_rel', 'model_one_id', 'product_id',  string="Products")
 	model_one_line_ids = fields.One2many('model.one.lines', 'model_one_id',  string="Products")
@@ -119,8 +120,9 @@ class ModelOne(models.Model):
 	@api.constrains('email')
 	def check_email(self):
 		for record in self:
-			if not record.email.endswith('@gmail.com'):
-				raise ValidationError("This email doesn't end with @gmail.com. Please enter a valid email address.")
+			if record.email:
+			    if not record.email.endswith('@gmail.com'):
+				    raise ValidationError("This email doesn't end with @gmail.com. Please enter a valid email address.")
 	
 	#4. _sql_constrains : to set database related constraints like unique, etc.
 	_sql_constraints = [
